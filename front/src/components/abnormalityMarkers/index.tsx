@@ -1,17 +1,23 @@
 import { Marker, Popup } from "react-leaflet";
 import { LatLngTuple } from "leaflet";
 
-import { WorksiteInfos } from "../../types";
+import { AbnormalityInfos } from "../../types";
+import { VERIFIED_ANOMALIES } from "../../constants/verifiedAnomalies";
 
 interface Props {
-  worksitesInfos: WorksiteInfos[];
+  abnormalityInfos: AbnormalityInfos[];
 }
 
-const WorksitesPolygons = (props: Props) => {
+const AbnormalityMarkers = (props: Props) => {
   const jsxMap = [];
 
-  for (const infos of props.worksitesInfos) {
-    if (infos.fields.geo_shape === undefined) continue;
+  for (const infos of props.abnormalityInfos) {
+    if (
+      infos.fields.geo_shape === undefined ||
+      !VERIFIED_ANOMALIES.includes(infos.fields.code_anomalie)
+    )
+      continue;
+
     const pointCoordinates = [
       infos.fields.geo_shape.coordinates[1],
       infos.fields.geo_shape.coordinates[0],
@@ -27,4 +33,4 @@ const WorksitesPolygons = (props: Props) => {
   return <>{jsxMap}</>;
 };
 
-export default WorksitesPolygons;
+export default AbnormalityMarkers;

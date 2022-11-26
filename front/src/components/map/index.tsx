@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer } from "react-leaflet";
 
 import fetchWorksites from "../../api/fetchWorksites";
-import { WorksiteInfos } from "../../types";
-import WorksitesPolygons from "../worksitesPolygons";
+import { AbnormalityInfos } from "../../types";
+import AbnormalityPolygons from "../abnormalityMarkers";
 import "./index.css";
 
 const Map = () => {
-  const [worksitesInfos, setWorksitesInfos] = useState<WorksiteInfos[]>([]);
+  const [worksitesInfos, setWorksitesInfos] = useState<AbnormalityInfos[]>([]);
 
   useEffect(() => {
     fetchWorksites().then((infos) => {
@@ -27,7 +27,7 @@ const Map = () => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <WorksitesPolygons worksitesInfos={worksitesInfos} />
+      <AbnormalityPolygons abnormalityInfos={worksitesInfos} />
     </MapContainer>
   );
 };
