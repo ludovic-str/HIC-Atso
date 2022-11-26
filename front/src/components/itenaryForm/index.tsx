@@ -27,7 +27,6 @@ const ItineraryForm = (props: Props) => {
       L.Routing.control({
         waypoints: [
           L.latLng(starting_x, starting_y),
-          L.latLng(48.9, 2.15),
           L.latLng(destination_x, destination_y),
         ],
       })
