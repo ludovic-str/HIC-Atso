@@ -1,16 +1,14 @@
 import axios from "axios";
-import { WorksiteInfos } from "../../types";
+import { AbnormalityInfos } from "../../types";
 
-const fetchWorksites = async (): Promise<WorksiteInfos[] | null> => {
+const fetchWorksites = async (): Promise<AbnormalityInfos[] | null> => {
   const url =
-    "https://opendata.paris.fr/api/records/1.0/search/?dataset=chantiers-a-paris&q=&facet=cp_arrondissement&facet=date_debut&facet=date_fin&facet=chantier_categorie&facet=moa_principal&facet=chantier_synthese&facet=localisation_detail&facet=localisation_stationnement&rows=1";
-
+    "https://data.strasbourg.eu/api/records/1.0/search/?dataset=vo_gp_anom_espub_pmr&rows=2000";
   try {
-    const data = (await axios.get(url)).data.records as WorksiteInfos[];
+    const data = (await axios.get(url)).data.records as AbnormalityInfos[];
 
     return data;
   } catch (e) {
-    console.log(e);
     return null;
   }
 };

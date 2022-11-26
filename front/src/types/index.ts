@@ -1,33 +1,26 @@
-interface WorksiteCoordPolygon {
+interface AbnormalityCoordPolygon {
   type: string;
-  coordinates: number[][][];
+  coordinates: number[];
 }
 
-interface WorksiteCoordPoint {
+interface AbnormalityCoordPoint {
   type: string;
   coordinaltes: number;
 }
 
 interface Fields {
-  chantier_categorie: string;
-  chantier_cite_id: string;
-  chantier_synthese: string;
-  cp_arrondissement: string;
-  date_debut: string;
-  date_fin: string;
-  demande_cite_id: string;
+  annee_leve: string;
   geo_point_2d: number[];
-  geo_shape: WorksiteCoordPolygon;
-  localisation_detail: string;
-  moa_principal: string;
-  num_emprise: string;
-  surface: number;
+  identifiant: string;
+  info_complementaire: string;
+  geo_shape: AbnormalityCoordPolygon | undefined;
+  code_anomalie: string;
 }
 
-export interface WorksiteInfos {
+export interface AbnormalityInfos {
   datasetid: string;
   fields: Fields;
   record_timestamp: Date;
   recordid: string;
-  geometry: WorksiteCoordPoint;
+  geometry: AbnormalityCoordPoint;
 }
