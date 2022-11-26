@@ -31,9 +31,6 @@ const ItineraryForm = (props: Props) => {
         ],
       })
     );
-    console.log("LOLO");
-    /*control =
-        control.addTo(map)*/
   };
 
   const onStartingPointChange = (e: React.ChangeEvent<FormElement>) => {
@@ -54,10 +51,15 @@ const ItineraryForm = (props: Props) => {
       48.65461528996865,
       7.829862438133382
     );
+
+    setDestination("");
+    setStart("");
   };
 
   return (
-    <Card css={{ width: "17vw", position: "absolute" }}>
+    <Card
+      css={{ width: "17vw", position: "absolute", top: "10px", left: "10px" }}
+    >
       <Card.Body>
         <form className="container" onSubmit={onSubmitForm}>
           <Input
@@ -70,7 +72,9 @@ const ItineraryForm = (props: Props) => {
             value={destination}
             onChange={onDestinationPointChange}
           />
-          <Button type="submit">Create itinerary</Button>
+          <Button type="submit" disabled={!start || !destination}>
+            Create itinerary
+          </Button>
         </form>
       </Card.Body>
     </Card>
