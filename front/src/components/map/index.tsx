@@ -19,8 +19,8 @@ const Map = () => {
 
   return (
     <MapContainer
-      center={[48.86195408599429, 2.3470007271109825]}
-      zoom={15}
+      center={[48.58322171431258, 7.773161392057082]}
+      zoom={17}
       scrollWheelZoom={true}
     >
       <TileLayer
@@ -28,11 +28,6 @@ const Map = () => {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <WorksitesPolygons worksitesInfos={worksitesInfos} />
-      <Marker position={[48.86195408599429, 2.3470007271109825]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
     </MapContainer>
   );
 };

@@ -1,5 +1,5 @@
-import { useMap } from "react-leaflet";
-import L, { LatLngTuple } from "leaflet";
+import { Marker, Popup } from "react-leaflet";
+import { LatLngTuple } from "leaflet";
 
 import { WorksiteInfos } from "../../types";
 
@@ -8,29 +8,23 @@ interface Props {
 }
 
 const WorksitesPolygons = (props: Props) => {
-  const map = useMap();
+  const jsxMap = [];
 
   for (const infos of props.worksitesInfos) {
-    if (
-      infos.fields.geo_shape === undefined ||
-      !infos.fields.localisation_detail.includes("EMPRISE_TROTTOIR")
-    )
-      continue;
-    const polygonCoordinates = infos.fields.geo_shape.coordinates[0];
+    if (infos.fields.geo_shape === undefined) continue;
+    const pointCoordinates = [
+      infos.fields.geo_shape.coordinates[1],
+      infos.fields.geo_shape.coordinates[0],
+    ] as LatLngTuple;
 
-    const coordArray: LatLngTuple[] = polygonCoordinates.map((coord) => [
-      coord[1],
-      coord[0],
-    ]);
-
-    L.polygon(coordArray, {
-      color: "red",
-      fillColor: "#f03",
-      fillOpacity: 0.2,
-    }).addTo(map);
+    jsxMap.push(
+      <Marker position={pointCoordinates} key={infos.recordid}>
+        <Popup>{infos.fields.code_anomalie}</Popup>
+      </Marker>
+    );
   }
 
-  return <></>;
+  return <>{jsxMap}</>;
 };
 
 export default WorksitesPolygons;

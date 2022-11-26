@@ -1,6 +1,6 @@
 interface WorksiteCoordPolygon {
   type: string;
-  coordinates: number[][][];
+  coordinates: number[];
 }
 
 interface WorksiteCoordPoint {
@@ -9,19 +9,12 @@ interface WorksiteCoordPoint {
 }
 
 interface Fields {
-  chantier_categorie: string;
-  chantier_cite_id: string;
-  chantier_synthese: string;
-  cp_arrondissement: string;
-  date_debut: string;
-  date_fin: string;
-  demande_cite_id: string;
+  annee_leve: string;
   geo_point_2d: number[];
+  identifiant: string;
+  info_complementaire: string;
   geo_shape: WorksiteCoordPolygon | undefined;
-  localisation_detail: string;
-  moa_principal: string;
-  num_emprise: string;
-  surface: number;
+  code_anomalie: string;
 }
 
 export interface WorksiteInfos {
