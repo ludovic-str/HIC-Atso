@@ -4,3 +4,7 @@
   position: absolute;
   z-index: -1;
 }
+
+.leaflet-routing-container {
+  display: none;
+}
