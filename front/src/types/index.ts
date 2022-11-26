@@ -24,3 +24,8 @@ export interface AbnormalityInfos {
   recordid: string;
   geometry: AbnormalityCoordPoint;
 }
+
+export interface GeocodeLatLng {
+  lat: number,
+  lng: number
+}
