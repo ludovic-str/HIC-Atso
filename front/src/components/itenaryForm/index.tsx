@@ -2,6 +2,7 @@ import "./index.css";
 import {Button, Card, FormElement, Input} from "@nextui-org/react";
 import React, {useState} from "react";
 import L, {Control} from "leaflet";
+import geocodeRequest from "../../api/geocoding";
 
 interface Props {
     control: Control | null
@@ -35,11 +36,14 @@ const ItineraryForm = (props: Props) => {
         setDestination(e.target.value)
     }
 
-    const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (!start || !destination)
             console.log("Error!")
-
+        const startCoordinate = await geocodeRequest(start)
+        const endCoordinate = await geocodeRequest(destination)
+        if (!startCoordinate || !endCoordinate)
+            console.log("Error!")
     }
 
     return (
