@@ -1,8 +1,9 @@
 import { Marker, Popup } from "react-leaflet";
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple, Icon, Point } from "leaflet";
 
 import { AbnormalityInfos } from "../../types";
 import { VERIFIED_ANOMALIES } from "../../constants/verifiedAnomalies";
+import MarkerIcon from "../../assets/market.png";
 
 interface Props {
   abnormalityInfos: AbnormalityInfos[];
@@ -10,6 +11,12 @@ interface Props {
 
 const AbnormalityMarkers = (props: Props) => {
   const jsxMap = [];
+
+  const icon: Icon = new Icon({
+    iconUrl: MarkerIcon,
+    iconRetinaUrl: MarkerIcon,
+    iconSize: new Point(22.5, 37.5),
+  });
 
   for (const infos of props.abnormalityInfos) {
     if (
@@ -24,7 +31,7 @@ const AbnormalityMarkers = (props: Props) => {
     ] as LatLngTuple;
 
     jsxMap.push(
-      <Marker position={pointCoordinates} key={infos.recordid}>
+      <Marker position={pointCoordinates} key={infos.recordid} icon={icon}>
         <Popup>{infos.fields.code_anomalie}</Popup>
       </Marker>
     );

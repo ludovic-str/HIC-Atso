@@ -23,12 +23,18 @@ const ItineraryForm = (props: Props) => {
     if (props.control) {
       props.control.remove();
     }
+
     props.setControl(
       L.Routing.control({
         waypoints: [
           L.latLng(starting_x, starting_y),
           L.latLng(destination_x, destination_y),
         ],
+        lineOptions: {
+          styles: [{ color: "blue", weight: 10 }],
+          extendToWaypoints: true,
+          missingRouteTolerance: 0,
+        },
       })
     );
   };
@@ -66,7 +72,12 @@ const ItineraryForm = (props: Props) => {
 
   return (
     <Card
-      css={{ width: "17vw", position: "absolute", top: "10px", left: "10px" }}
+      css={{
+        width: "17vw",
+        position: "absolute",
+        top: "10px",
+        left: "10px",
+      }}
     >
       <Card.Body>
         <form className="container" onSubmit={onSubmitForm}>
