@@ -2,6 +2,7 @@ import "./index.css";
 import { Button, Card, FormElement, Input } from "@nextui-org/react";
 import React, { useState } from "react";
 import L, { Control } from "leaflet";
+import geocodeRequest from "../../api/geocoding";
 import "leaflet-routing-machine";
 
 interface Props {
@@ -26,7 +27,6 @@ const ItineraryForm = (props: Props) => {
       L.Routing.control({
         waypoints: [
           L.latLng(starting_x, starting_y),
-          L.latLng(48.9, 2.15),
           L.latLng(destination_x, destination_y),
         ],
       })
@@ -41,15 +41,23 @@ const ItineraryForm = (props: Props) => {
     setDestination(e.target.value);
   };
 
-  const onSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmitForm = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (!start || !destination) console.log("Error!");
-
+    if (!start || !destination) {
+      console.log("Error!");
+      return;
+    }
+    const startCoordinate = await geocodeRequest(start);
+    const endCoordinate = await geocodeRequest(destination);
+    if (!startCoordinate || !endCoordinate) {
+      console.log("Error!");
+      return;
+    }
     createItinerary(
-      48.60049869502856,
-      7.730453184775221,
-      48.65461528996865,
-      7.829862438133382
+      startCoordinate.lat,
+      startCoordinate.lng,
+      endCoordinate.lat,
+      endCoordinate.lng
     );
 
     setDestination("");
