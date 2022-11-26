@@ -17,7 +17,7 @@ interface Fields {
   date_fin: string;
   demande_cite_id: string;
   geo_point_2d: number[];
-  geo_shape: WorksiteCoordPolygon;
+  geo_shape: WorksiteCoordPolygon | undefined;
   localisation_detail: string;
   moa_principal: string;
   num_emprise: string;
