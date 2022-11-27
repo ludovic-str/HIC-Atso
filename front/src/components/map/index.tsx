@@ -34,7 +34,7 @@ const Map = () => {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <AbnormalityPolygons abnormalityInfos={worksitesInfos} />
-          <AddItinerary control={control} />
+          {/*<AddItinerary control={control} />*/}
         </MapContainer>
       </div>
     </>
